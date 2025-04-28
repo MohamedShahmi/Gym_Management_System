@@ -1,0 +1,84 @@
+/* Ensure Form Container has a solid background */
+.form-container {
+  max-width: 600px;
+  margin: auto;
+  padding: 30px;
+  background-color: #ffffff !important;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+}
+
+/* Ensure Text Colors are Visible */
+.form-title {
+  color: #333;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+label {
+  color: #333;
+  font-weight: 600;
+  margin-bottom: 5px;
+  display: block;
+}
+
+/* Form Fields */
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #fbf7f7 !important; /* Default border color */
+  border-radius: 6px;
+  font-size: 16px;
+  color: #333;
+  background-color: #ffffff;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Highlight fields on focus */
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: #ff8800 !important; /* Orange outline when selected */
+  outline: none;
+  box-shadow: 0 0 5px rgba(255, 136, 0, 0.7);
+}
+
+/* Submit Button */
+.form-button {
+  background-color: #007bff;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-top: 20px;
+  transition: background-color 0.3s ease;
+}
+
+.form-button:hover {
+  background-color: #0056b3 !important;
+}
+
+/* Spacing between form elements */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+/* Fix for Background Override Issue */
+.home-page {
+  background: none !important;
+  background-color: #f4f4f4 !important;
+}

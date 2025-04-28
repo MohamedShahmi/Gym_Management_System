@@ -1,0 +1,27 @@
+/* src/App.css */
+
+/* Ensure the app container takes up the full height of the viewport */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%; /* Full height of the viewport */
+}
+
+.app-container {
+  display: flex; /* Use Flexbox for layout */
+  flex-direction: column; /* Stack children vertically */
+  min-height: 100vh; /* Ensure the container occupies the full viewport height */
+}
+
+.main-content {
+  flex-grow: 1; /* Allow the main content to expand and push the footer down */
+  padding: 20px; /* Add some padding for spacing */
+  text-align: center; /* Center-align text for better aesthetics */
+}
+
+footer.footer {
+  background-color: #800000; /* Dark red */
+  color: white;
+  padding: 1.5rem 0;
+  text-align: center;
+}

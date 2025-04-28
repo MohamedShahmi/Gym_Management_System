@@ -1,0 +1,102 @@
+/* src/Components/Pages/UsersDashboard.css */
+
+/* Main container for the users dashboard */
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Ensure the container takes at least the height of the screen */
+}
+
+/* Style for the header */
+.dashboard-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #2980b9; /* Dark blue header color */
+  font-size: 2rem; /* Optional: adjust the font size for better styling */
+}
+
+/* Table container */
+.table-container {
+  flex: 1; /* This will push the button to the bottom */
+  overflow: auto;
+}
+
+.users-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.users-table th, .users-table td {
+  padding: 12px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+.users-table th {
+  background-color: #2c3e50; /* Dark blue background for the table header */
+  color: white; /* White text color for the headers */
+}
+
+.users-table td {
+  background-color: #f9f9f9; /* Light background color for table rows */
+}
+
+.action-group {
+  display: flex;
+  gap: 10px;
+}
+
+.action-button {
+  padding: 6px 12px;
+  cursor: pointer;
+  border-radius: 4px;
+  border: none;
+  font-size: 14px;
+}
+
+.read-button {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.update-button {
+  background-color: #007bff;
+  color: white;
+}
+
+.delete-button {
+  background-color: #f44336;
+  color: white;
+}
+
+/* Container for Add User button */
+.add-user-container {
+  margin-top: auto; /* Push the button to the bottom */
+  text-align: center;
+  padding: 20px;
+}
+
+.btn-create {
+  background-color: #3498db; /* Light blue button color */
+  color: white;
+  padding: 12px 20px;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-create:hover {
+  background-color: #2980b9; /* Darker blue on hover */
+}
+
+footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+}

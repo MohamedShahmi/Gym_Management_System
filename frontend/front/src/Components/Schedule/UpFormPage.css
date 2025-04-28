@@ -1,0 +1,23 @@
+/* src/Components/Schedule/UpFormPage.css */
+
+.form-container {
+    background-color: #f9f9f9; /* Light background */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    margin: 20px auto; /* Center the container */
+    max-width: 800px; /* Limit width for better readability */
+  }
+  
+  h1 {
+    text-align: center;
+    color: #333; /* Dark gray for headings */
+    margin-bottom: 20px;
+  }
+  
+  main {
+    min-height: 80vh; /* Ensure main content occupies sufficient vertical space */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center content horizontally */
+  }

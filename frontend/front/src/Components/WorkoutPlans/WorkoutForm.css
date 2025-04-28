@@ -1,0 +1,83 @@
+/* WorkoutForm.css */
+.form-container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #333; /* Dark gray background */
+    color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  
+  .form-title {
+    text-align: center;
+    color: #FFA500;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  .form-group input,
+  .form-group select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: none;
+    border-radius: 5px;
+    background-color: #444;
+    color: white;
+  }
+  
+  .error-text {
+    color: red;
+    font-size: 12px;
+  }
+  
+  .form-button {
+    background-color: #FFA500;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  .form-message {
+    text-align: center;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+  
+  .btn-update {
+    background-color: #9ACD32;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 5px;
+  }
+  
+  .btn-delete {
+    background-color: #FFA500;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .error-text {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+  }

@@ -1,0 +1,34 @@
+/* src/styles/Footer.css */
+.footer {
+  background-color: #800000 !important; /* Dark red */
+  color: white;
+  padding: 1.5rem 0;
+  text-align: center;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.copyright {
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.social-links {
+  margin-top: 1rem;
+}
+
+.social-links a {
+  text-decoration: none;
+  color: white;
+  font-size: 0.9rem;
+  margin: 0 10px;
+  transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+  color: #f39c12; /* Highlight color on hover */
+}

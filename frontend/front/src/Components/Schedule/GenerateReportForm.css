@@ -1,0 +1,68 @@
+/* General Form Container */
+.report-form-container {
+    max-width: 500px;
+    margin: auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Title Styling */
+  h2 {
+    text-align: center;
+    font-size: 22px;
+    margin-bottom: 15px;
+    color: #ff8c00; /* Orange title */
+  }
+  
+  /* Form Layout */
+  .form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Form Group Styling */
+  .form-group {
+    margin-bottom: 12px;
+  }
+  
+  label {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 5px;
+    display: block;
+    color: #000000; /* Black text */
+  }
+  
+  input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #000000; /* Black text */
+  }
+  
+  /* Error Text Styling */
+  .error-text {
+    color: red;
+    font-size: 12px;
+    margin-top: 2px;
+  }
+  
+  /* Submit Button Styling */
+  .form-button {
+    background-color: #800000 !important;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .form-button:hover {
+    background-color: #eb2446 !important;
+  }

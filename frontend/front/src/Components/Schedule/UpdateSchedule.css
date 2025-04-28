@@ -1,0 +1,61 @@
+/* src/Components/Schedule/UpdateSchedule.css */
+
+.form-title {
+    text-align: center;
+    font-size: 2rem;
+    color: #00b4d8; /* Teal color for emphasis */
+    margin-bottom: 20px;
+  }
+  
+  .form-message {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #2c3e50; /* Dark blue for success/error messages */
+  }
+  
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Space between form fields */
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  
+  label {
+    font-weight: bold;
+    color: #333; /* Dark gray for labels */
+  }
+  
+  input,
+  select,
+  textarea {
+    padding: 10px;
+    border: 1px solid #ccc; /* Light gray border */
+    border-radius: 5px;
+    font-size: 1rem;
+  }
+  
+  button {
+    background-color: #00b4d8; /* Teal button */
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease; /* Smooth hover effect */
+  }
+  
+  button:hover {
+    background-color: #0096c6; /* Slightly darker teal on hover */
+  }
+  
+  .error-text {
+    color: red; /* Red for error messages */
+    font-size: 0.9rem;
+  }

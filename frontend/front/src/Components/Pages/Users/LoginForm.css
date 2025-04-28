@@ -1,0 +1,113 @@
+/* General reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Page background */
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f4f8;
+    color: #333;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  
+  /* Header styling */
+  header {
+    background-color: #ff4d4d; /* Add your desired red color */
+    color: white;
+    text-align: center;
+    padding: 15px;
+    font-size: 24px;
+    width: 100%;
+    position: relative;
+    top: 0;
+    z-index: 1; /* Ensure it stays on top */
+  }
+  
+  /* Centering content under the header */
+  header h1 {
+    margin: 0;
+    position: absolute;
+    top: 50%; /* Vertically center */
+    left: 50%;
+    transform: translate(-50%, -50%); /* Center text horizontally and vertically */
+  }
+  
+  /* Center the login form */
+  .login-form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 100px); /* Adjust to avoid overlap with header/footer */
+  }
+  
+  /* Login form styling */
+  .login-form {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  .login-form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+    font-size: 24px;
+  }
+  
+  .login-form label {
+    font-weight: bold;
+    margin-bottom: 8px;
+    display: block;
+    color: #555;
+  }
+  
+  .login-form input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+  
+  .login-form input:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+  
+  .login-form button {
+    width: 100%;
+    padding: 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .login-form button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Footer styling */
+  footer {
+    background-color: #222;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+  }
+  

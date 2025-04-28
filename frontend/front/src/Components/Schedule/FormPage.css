@@ -1,0 +1,18 @@
+/* General Page Styling */
+.form-page {
+  min-height: 100vh; /* Ensure full viewport height */
+  display: flex;
+  flex-direction: column;
+}
+
+.form-container {
+  flex-grow: 1; /* Allow main content to expand */
+  padding: 20px;
+  background-image: url("../../assets/background.png"); /* Replace with your image path */
+  background-size: cover; /* Cover the entire container */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Prevent repetition */
+  display: flex;
+  justify-content: center; /* Center the form horizontally */
+  align-items: center; /* Center the form vertically */
+}

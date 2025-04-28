@@ -1,0 +1,52 @@
+/* src/Components/Schedule/Header.css */
+
+/* src/Components/Header.css */
+
+.header {
+  background-color: #800000 !important; 
+  color: white;
+  display: flex;
+  justify-content: space-between; /* Align logo to left and nav to right */
+  align-items: center;
+  padding: 10px 20px;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between; /* Ensure spacing between logo and nav */
+  align-items: center;
+  width: 100%;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  height: 60px;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 100px; /* Evenly space the navigation links */
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.nav-links li a:hover {
+  text-decoration: underline;
+}

@@ -1,0 +1,85 @@
+/* src/Components/WorkoutPlans/WorkoutList.css */
+.workout-list-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #313131; /* Dark gray background */
+    color: rgb(253, 253, 253); /* White text */
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  h2 {
+    color: white; /* Ensure the heading is white */
+    text-align: center; /* Center-align the heading */
+    margin-bottom: 20px;
+  }
+  
+  .workout-cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .workout-card {
+    flex: 1 1 calc(33.333% - 40px); /* Responsive layout for cards */
+    background-color: #333; /* Slightly lighter gray for cards */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .workout-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  }
+  
+  .card-beginner {
+    background-color: #02893f; 
+  }
+  
+  .card-medium {
+    background-color: #011ca3; 
+  }
+  
+  .card-advanced {
+    background-color: #740202; 
+  }
+  
+  .card-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+  }
+  
+  .btn-update {
+    background-color: #32cd35; /* Bright green for Update button */
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .btn-delete {
+    background-color: #f30a0a; /* Bright red for Delete button */
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .workout-card {
+      flex: 1 1 calc(50% - 40px); /* Two cards per row on smaller screens */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .workout-card {
+      flex: 1 1 100%; /* One card per row on very small screens */
+    }
+  }

@@ -1,0 +1,95 @@
+/* Ensure Form Container has a solid background */
+.form-container {
+  max-width: 1000px;
+  margin: auto;
+  padding: 20px;
+  background-color: #ffffff !important; /* Enforce white background */
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Ensure Text Colors are Visible */
+.form-title,
+label {
+  color: #000000 !important; /* Ensure text is black */
+}
+
+/* Form Fields */
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  color: #000000 !important; /* Ensure text inside fields is visible */
+  background-color: #ffffff !important; /* Ensure input fields have a white background */
+}
+
+/* Submit Button */
+.form-button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.form-button:hover {
+  background-color: #0056b3;
+}
+
+/* Fix for Background Override Issue */
+.home-page {
+  background: none !important; /* Remove unwanted background */
+  background-color: #f4f4f4 !important; /* Set a light background */
+}
+
+/* Center the button container */
+.button-container {
+  display: flex;
+  justify-content: center; /* Centers the buttons horizontally */
+  align-items: center; /* Aligns buttons vertically */
+  gap: 20px; /* Adds space between the buttons */
+  margin-top: 20px; /* Adds some spacing above the buttons */
+}
+
+/* Style for the buttons */
+.btn-create {
+  background-color: #800000 !important;
+  color: white;
+  padding: 10px 20px; /* Adjust padding for better appearance */
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-create:hover {
+  background-color: #eb2446 !important;
+}
+
+/* Ensure the main content has proper alignment */
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centers the ScheduleTable and buttons */
+  padding: 20px;
+}
+
+/* Ensure the page has a clean background */
+.home-page {
+  background-color: #f4f4f4; /* Light background for the page */
+  min-height: 100vh; /* Full viewport height */
+  display: flex;
+  flex-direction: column;
+}
