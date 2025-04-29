@@ -14,17 +14,12 @@ A modern web application designed to efficiently manage gym operations and enhan
    - Assign trainers to members
    - Schedule training sessions
 
-3. **Payment System**
-   - Track membership payments
-   - Generate invoices and receipts
-   - Payment history management
-
-4. **Reports & Analytics**
+3. **Reports & Analytics**
    - Member activity reports
    - Revenue tracking
    - Membership statistics
 
-5. **User-Friendly Interface**
+4. **User-Friendly Interface**
    - Intuitive navigation
    - Responsive design for mobile and desktop
    - Real-time notifications
@@ -71,8 +66,6 @@ gym-management-system/
    ```bash
    npm start
    ```
-
-5. Open the application in your browser at `http://localhost:3000`.
 
 ## Contributing
 
