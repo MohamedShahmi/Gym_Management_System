@@ -1,14 +1,14 @@
-// SignupForm.js
-
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Header from '../../Schedule/Header';
 import Footer from '../../Schedule/Footer';
-import './SignupForm.css'; // Make sure this import is added
+import './SignupForm.css';
 
 const SignupForm = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     userID: '',
     username: '',
@@ -32,14 +32,13 @@ const SignupForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Send POST request to create a new user
+      // Send POST request to create a new user via /signup
       const response = await axios.post('http://localhost:5000/api/users/signup', formData);
 
       if (response.data.message === "User created successfully") {
         toast.success("Account created successfully!");
         setTimeout(() => {
-          // Redirect to login page after a short delay
-          window.location.href = "/login";
+          navigate('/login');
         }, 2000);
       }
     } catch (error) {
@@ -49,7 +48,7 @@ const SignupForm = () => {
 
   return (
     <div className="signup-container">
-      <Header /> {/* Add Header here */}
+      <Header />
       <div className="signup-form-container">
         <div className="signup-form">
           <h2>Sign Up</h2>
@@ -127,10 +126,26 @@ const SignupForm = () => {
               required
             />
             <input type="submit" value="Sign Up" />
+
+            {/* Manual Login Link */}
+            <p className="login-link">
+              Already have an account?{" "}
+              <span
+                onClick={() => navigate('/login')}
+                style={{
+                  color: 'blue',
+                  cursor: 'pointer',
+                  textDecoration: 'underline',
+                  marginLeft: '4px'
+                }}
+              >
+                Login here
+              </span>
+            </p>
           </form>
         </div>
       </div>
-      <Footer /> {/* Add Footer here */}
+      <Footer />
     </div>
   );
 };
