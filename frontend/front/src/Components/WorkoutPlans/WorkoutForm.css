@@ -43,30 +43,45 @@
 
 /* Updated Button Styles */
 .form-button {
-  background-color: red; /* Red button */
-  color: white;
+  background-color: #90caf9; /* Light blue for submit button */
+  color: black; /* Black text for readability */
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   margin-top: 10px;
+  transition: background-color 0.3s ease; /* Smooth hover effect */
+}
+
+.form-button:hover {
+  background-color: #64b5f6; /* Slightly darker blue on hover */
 }
 
 .btn-update {
-  background-color: red; /* Red for update button */
-  color: white;
+  background-color: #90caf9; /* Light blue for update button */
+  color: black; /* Black text for readability */
   padding: 5px 10px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   margin-right: 5px;
+  transition: background-color 0.3s ease; /* Smooth hover effect */
+}
+
+.btn-update:hover {
+  background-color: #64b5f6; /* Slightly darker blue on hover */
 }
 
 .btn-delete {
-  background-color: red; /* Red for delete button */
-  color: white;
+  background-color: #ef9a9a; /* Light red for delete button */
+  color: black; /* Black text for readability */
   padding: 5px 10px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  transition: background-color 0.3s ease; /* Smooth hover effect */
+}
+
+.btn-delete:hover {
+  background-color: #e57373; /* Slightly darker red on hover */
 }

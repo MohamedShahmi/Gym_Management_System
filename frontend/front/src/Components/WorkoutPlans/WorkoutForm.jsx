@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import html2pdf from "html2pdf.js"; // Import PDF generation library
-import "./WorkoutForm.css"; // Import CSS for styling
+import html2pdf from "html2pdf.js";
+import "./WorkoutForm.css";
 
-// Predefined workout plans
 const predefinedWorkouts = {
   "Weight Loss": {
     Beginner: {
@@ -27,6 +26,18 @@ const predefinedWorkouts = {
         { exerciseName: "Barbell Rows", sets: 4, restTime: 90 },
         { exerciseName: "Overhead Press", sets: 4, restTime: 90 },
         { exerciseName: "Dips", sets: 3, restTime: 60 },
+      ],
+    },
+    Advanced: {
+      "3 Days/Week": [
+        { exerciseName: "Power Cleans", sets: 5, restTime: 120 },
+        { exerciseName: "Pistol Squats", sets: 4, restTime: 90 },
+        { exerciseName: "Muscle-ups", sets: 4, restTime: 90 },
+      ],
+      "5 Days/Week": [
+        { exerciseName: "Snatch", sets: 5, restTime: 120 },
+        { exerciseName: "Clean and Jerk", sets: 5, restTime: 120 },
+        { exerciseName: "Box Jumps", sets: 4, restTime: 60 },
       ],
     },
   },
@@ -55,8 +66,59 @@ const predefinedWorkouts = {
         { exerciseName: "Ring Dips", sets: 3, restTime: 60 },
       ],
     },
+    Advanced: {
+      "3 Days/Week": [
+        { exerciseName: "Barbell Back Squats", sets: 5, restTime: 120 },
+        { exerciseName: "Incline Bench Press", sets: 5, restTime: 90 },
+        { exerciseName: "Weighted Pull-ups", sets: 4, restTime: 90 },
+      ],
+      "5 Days/Week": [
+        { exerciseName: "Split Squats", sets: 4, restTime: 90 },
+        { exerciseName: "Military Press", sets: 4, restTime: 90 },
+        { exerciseName: "Cable Crossovers", sets: 4, restTime: 60 },
+      ],
+    },
+  },
+  "Increasing Flexibility": {
+    Beginner: {
+      "3 Days/Week": [
+        { exerciseName: "Neck Stretch", sets: 2, restTime: 30 },
+        { exerciseName: "Shoulder Rolls", sets: 2, restTime: 30 },
+        { exerciseName: "Standing Toe Touch", sets: 2, restTime: 30 },
+      ],
+      "5 Days/Week": [
+        { exerciseName: "Seated Forward Bend", sets: 3, restTime: 30 },
+        { exerciseName: "Cat-Cow Stretch", sets: 3, restTime: 30 },
+        { exerciseName: "Butterfly Stretch", sets: 3, restTime: 30 },
+      ],
+    },
+    Intermediate: {
+      "3 Days/Week": [
+        { exerciseName: "Pigeon Pose", sets: 3, restTime: 45 },
+        { exerciseName: "Lizard Pose", sets: 3, restTime: 45 },
+        { exerciseName: "Side Lunges", sets: 3, restTime: 30 },
+      ],
+      "5 Days/Week": [
+        { exerciseName: "Standing Quad Stretch", sets: 4, restTime: 30 },
+        { exerciseName: "Hamstring Stretch", sets: 4, restTime: 30 },
+        { exerciseName: "Triceps Stretch", sets: 4, restTime: 30 },
+      ],
+    },
+    Advanced: {
+      "3 Days/Week": [
+        { exerciseName: "Split Stretches", sets: 4, restTime: 60 },
+        { exerciseName: "Bridge Pose", sets: 4, restTime: 60 },
+        { exerciseName: "Backbend to Wheel Pose", sets: 3, restTime: 90 },
+      ],
+      "5 Days/Week": [
+        { exerciseName: "Advanced Hamstring Stretch", sets: 4, restTime: 60 },
+        { exerciseName: "Full Pigeon with Forward Bend", sets: 4, restTime: 60 },
+        { exerciseName: "Scorpion Stretch", sets: 4, restTime: 60 },
+      ],
+    },
   },
 };
+
 
 const WorkoutForm = ({ onSubmit, initialData }) => {
   const [formData, setFormData] = useState(
@@ -243,6 +305,7 @@ const WorkoutForm = ({ onSubmit, initialData }) => {
     html2pdf().from(pdfContent).set(options).save();
   };
 
+
   return (
     <div className="form-container">
       <h2 className="form-title">Create/Edit Workout Plan</h2>
@@ -285,6 +348,7 @@ const WorkoutForm = ({ onSubmit, initialData }) => {
             <option value="">Select Goal</option>
             <option value="Weight Loss">Weight Loss</option>
             <option value="Muscle Gain">Muscle Gain</option>
+            <option value="Increasing Flexibility">Increasing Flexibility</option>
           </select>
           {errors.fitnessGoal && <p className="error-text">{errors.fitnessGoal}</p>}
         </div>
@@ -301,6 +365,8 @@ const WorkoutForm = ({ onSubmit, initialData }) => {
             <option value="">Select Level</option>
             <option value="Beginner">Beginner</option>
             <option value="Intermediate">Intermediate</option>
+            <option value="Advanced">Advanced</option>
+            
           </select>
           {errors.level && <p className="error-text">{errors.level}</p>}
         </div>
