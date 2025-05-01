@@ -4,13 +4,14 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import Header from "../../Schedule/Header";
 import Footer from "../../Schedule/Footer";
-import ReadUserForm from "./ReadUserForm"; // Import the ReadUserForm modal
+import ReadUserForm from "./ReadUserForm";
+import UpdateUserForm from "./UpdateUserForm";
 import "./UsersDashboard.css";
 
 const UsersDashboard = () => {
   const [users, setUsers] = useState([]);
-  const [selectedUser, setSelectedUser] = useState(null);
-  const [showReadForm, setShowReadForm] = useState(false);
+  const [selectedUserForRead, setSelectedUserForRead] = useState(null);
+  const [selectedUserForUpdate, setSelectedUserForUpdate] = useState(null);
   const navigate = useNavigate();
 
   const fetchUsers = () => {
@@ -34,18 +35,19 @@ const UsersDashboard = () => {
     }
   };
 
+  const handleUpdateUser = async (updatedUser) => {
+    try {
+      await axios.put(`http://localhost:3000/api/users/${updatedUser._id}`, updatedUser);
+      toast.success("User updated successfully!");
+      fetchUsers();
+      setSelectedUserForUpdate(null);
+    } catch (error) {
+      toast.error("Error updating user!");
+    }
+  };
+
   const handleAddUser = () => {
     navigate("/signup");
-  };
-
-  const handleRead = (user) => {
-    setSelectedUser(user);
-    setShowReadForm(true);
-  };
-
-  const closeReadForm = () => {
-    setSelectedUser(null);
-    setShowReadForm(false);
   };
 
   return (
@@ -76,19 +78,19 @@ const UsersDashboard = () => {
                 <td>{user.phoneno}</td>
                 <td>
                   <div className="action-group">
-                    <button 
+                    <button
                       className="read-button"
-                      onClick={() => handleRead(user)}
+                      onClick={() => setSelectedUserForRead(user)}
                     >
                       Read
                     </button>
-                    <button 
+                    <button
                       className="update-button"
-                      onClick={() => toast.info(`Update user ${user.userID}`)}
+                      onClick={() => setSelectedUserForUpdate(user)}
                     >
                       Update
                     </button>
-                    <button 
+                    <button
                       className="delete-button"
                       onClick={() => handleDelete(user._id)}
                     >
@@ -100,17 +102,27 @@ const UsersDashboard = () => {
             ))}
           </tbody>
         </table>
+
         <div className="add-user-container">
-          <button 
-            onClick={handleAddUser} 
-            className="btn-create"
-          >
+          <button onClick={handleAddUser} className="btn-create">
             Add User
           </button>
         </div>
-      </div>
 
-      {showReadForm && <ReadUserForm user={selectedUser} onClose={closeReadForm} />}
+        {/* Read Modal */}
+        {selectedUserForRead && (
+          <ReadUserForm user={selectedUserForRead} onClose={() => setSelectedUserForRead(null)} />
+        )}
+
+        {/* Update Modal */}
+        {selectedUserForUpdate && (
+          <UpdateUserForm
+            user={selectedUserForUpdate}
+            onClose={() => setSelectedUserForUpdate(null)}
+            onUpdate={handleUpdateUser}
+          />
+        )}
+      </div>
       <Footer />
     </div>
   );
