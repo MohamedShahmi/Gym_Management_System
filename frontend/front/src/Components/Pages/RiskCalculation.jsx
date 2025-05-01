@@ -66,7 +66,7 @@ const RiskCalculation = () => {
       stretchesSets,
     } = data;
 
-    const bmi = (weight / ((height / 100) ** 2)).toFixed(2);
+    const bmi = weight / ((height / 100) ** 2);
 
     const totalSets =
       parseInt(cardioSets) +
@@ -75,30 +75,40 @@ const RiskCalculation = () => {
       parseInt(pushupsSets) +
       parseInt(stretchesSets);
 
-    const cholesterolScore =
-      cholesterolLevel === "High" ? 3 : cholesterolLevel === "Medium" ? 2 : 1;
-    const sugarScore =
-      sugarLevel === "High" ? 3 : sugarLevel === "Medium" ? 2 : 1;
-    const pressureScore =
-      pressureLevel === "High" ? 3 : pressureLevel === "Medium" ? 2 : 1;
+    // Risk scores
+    let riskScore = 0;
 
-    const riskScore =
-      parseFloat(age) * 0.5 +
-      parseFloat(bmi) * 0.7 +
-      cholesterolScore * 2 +
-      sugarScore * 2 +
-      pressureScore * 2 -
-      totalSets * 0.5;
+    // Health condition scores
+    if (cholesterolLevel === "High") riskScore += 30;
+    else if (cholesterolLevel === "Medium") riskScore += 15;
 
-    const maxRisk = 100;
-    const riskPercentage = Math.min(100, Math.max(0, (riskScore / maxRisk) * 100));
+    if (sugarLevel === "High") riskScore += 30;
+    else if (sugarLevel === "Medium") riskScore += 15;
+
+    if (pressureLevel === "High") riskScore += 30;
+    else if (pressureLevel === "Medium") riskScore += 15;
+
+    // BMI
+    if (bmi > 25) riskScore += 10;
+    else if (bmi < 18.5) riskScore += 5;
+
+    // Physical activity lowers risk
+    if (totalSets >= 100) riskScore -= 20;
+    else if (totalSets >= 60) riskScore -= 10;
+    else if (totalSets >= 30) riskScore -= 5;
+
+    // Young age benefit (slightly reduces risk)
+    if (age < 18) riskScore -= 5;
+
+    // Clamp risk score to minimum 5 and max 100
+    riskScore = Math.min(100, Math.max(5, riskScore));
 
     let riskCategory = "Low";
-    if (riskPercentage > 60) riskCategory = "High";
-    else if (riskPercentage > 30) riskCategory = "Medium";
+    if (riskScore > 70) riskCategory = "High";
+    else if (riskScore > 40) riskCategory = "Medium";
 
     return {
-      riskPercentage: riskPercentage.toFixed(1),
+      riskPercentage: riskScore.toFixed(1),
       riskCategory,
     };
   };
