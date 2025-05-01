@@ -10,7 +10,7 @@ import {
 const router = express.Router();
 
 // Route to create a new user
-router.post("/", createUser);
+router.post("/signup", createUser);
 
 // Route to get all users
 router.get("/", getAllUsers);
@@ -23,5 +23,7 @@ router.put("/:id", updateUser);
 
 // Route to delete a user by ID
 router.delete("/:id", deleteUser);
+
+
 
 export default router;
