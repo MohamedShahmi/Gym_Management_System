@@ -1,7 +1,61 @@
-// src/Components/WorkoutPlans/WorkoutForm.jsx
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState } from "react";
 import "./WorkoutForm.css"; // Import CSS for styling
+
+// Predefined workout plans
+const predefinedWorkouts = {
+  "Weight Loss": {
+    Beginner: {
+      "3 Days/Week": [
+        { exerciseName: "Squats", sets: 3, restTime: 60 },
+        { exerciseName: "Push-ups", sets: 3, restTime: 60 },
+        { exerciseName: "Plank", sets: 3, restTime: 30 },
+      ],
+      "5 Days/Week": [
+        { exerciseName: "Jumping Jacks", sets: 4, restTime: 60 },
+        { exerciseName: "Lunges", sets: 4, restTime: 60 },
+        { exerciseName: "Burpees", sets: 4, restTime: 90 },
+      ],
+    },
+    Intermediate: {
+      "3 Days/Week": [
+        { exerciseName: "Deadlifts", sets: 4, restTime: 90 },
+        { exerciseName: "Bench Press", sets: 4, restTime: 90 },
+        { exerciseName: "Pull-ups", sets: 3, restTime: 60 },
+      ],
+      "5 Days/Week": [
+        { exerciseName: "Barbell Rows", sets: 4, restTime: 90 },
+        { exerciseName: "Overhead Press", sets: 4, restTime: 90 },
+        { exerciseName: "Dips", sets: 3, restTime: 60 },
+      ],
+    },
+  },
+  "Muscle Gain": {
+    Beginner: {
+      "3 Days/Week": [
+        { exerciseName: "Goblet Squats", sets: 3, restTime: 60 },
+        { exerciseName: "Incline Push-ups", sets: 3, restTime: 60 },
+        { exerciseName: "Side Plank", sets: 3, restTime: 30 },
+      ],
+      "5 Days/Week": [
+        { exerciseName: "Kettlebell Swings", sets: 4, restTime: 60 },
+        { exerciseName: "Step-ups", sets: 4, restTime: 60 },
+        { exerciseName: "Mountain Climbers", sets: 4, restTime: 90 },
+      ],
+    },
+    Intermediate: {
+      "3 Days/Week": [
+        { exerciseName: "Front Squats", sets: 4, restTime: 90 },
+        { exerciseName: "Close-grip Bench Press", sets: 4, restTime: 90 },
+        { exerciseName: "Chin-ups", sets: 3, restTime: 60 },
+      ],
+      "5 Days/Week": [
+        { exerciseName: "Romanian Deadlifts", sets: 4, restTime: 90 },
+        { exerciseName: "Arnold Press", sets: 4, restTime: 90 },
+        { exerciseName: "Ring Dips", sets: 3, restTime: 60 },
+      ],
+    },
+  },
+};
 
 const WorkoutForm = ({ onSubmit, initialData }) => {
   const [formData, setFormData] = useState(
@@ -12,37 +66,55 @@ const WorkoutForm = ({ onSubmit, initialData }) => {
       duration: "",
       frequency: "",
       assignedTrainer: "",
-      exercises: [{ exerciseName: "", sets: "", restTime: "" }],
+      exercises: [],
     }
   );
 
-  const [errors, setErrors] = useState({}); // State to manage validation errors
-
-  // Reset form data if initialData changes
-  useEffect(() => {
-    if (initialData) {
-      setFormData(initialData);
-    }
-  }, [initialData]);
+  const [errors, setErrors] = useState({});
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-    validateField(name, value); // Validate the field on change
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+    validateField(name, value);
   };
 
   const handleExerciseChange = (index, field, value) => {
     const updatedExercises = [...formData.exercises];
     updatedExercises[index][field] = value;
-    setFormData({ ...formData, exercises: updatedExercises });
-    validateExerciseField(index, field, value); // Validate the exercise field
+    setFormData((prevData) => ({
+      ...prevData,
+      exercises: updatedExercises,
+    }));
+    validateExerciseField(index, field, value);
   };
 
   const addExerciseField = () => {
-    setFormData({
-      ...formData,
-      exercises: [...formData.exercises, { exerciseName: "", sets: "", restTime: "" }],
-    });
+    setFormData((prevData) => ({
+      ...prevData,
+      exercises: [...prevData.exercises, { exerciseName: "", sets: "", restTime: "" }],
+    }));
+  };
+
+  const generateExercises = () => {
+    const { fitnessGoal, level, frequency } = formData;
+
+    // Find the matching predefined workout plan
+    const selectedPlan =
+      predefinedWorkouts[fitnessGoal]?.[level]?.[frequency];
+
+    if (!selectedPlan) {
+      alert("No matching workout plan found. Please select valid options.");
+      return;
+    }
+
+    // Set the generated workout plan
+    setFormData((prevData) => ({
+      ...prevData,
+      exercises: selectedPlan,
+    }));
   };
 
   const validateField = (name, value) => {
@@ -76,18 +148,6 @@ const WorkoutForm = ({ onSubmit, initialData }) => {
         break;
       default:
         break;
-    }
-    setErrors(newErrors);
-  };
-
-  const validateExerciseField = (index, field, value) => {
-    let newErrors = { ...errors };
-    if (!value) {
-      newErrors[`exercise-${index}-${field}`] = `${field} is required.`;
-    } else if (["sets", "restTime"].includes(field) && (isNaN(value) || value <= 0)) {
-      newErrors[`exercise-${index}-${field}`] = `${field} must be a positive number.`;
-    } else {
-      delete newErrors[`exercise-${index}-${field}`];
     }
     setErrors(newErrors);
   };
@@ -172,9 +232,9 @@ const WorkoutForm = ({ onSubmit, initialData }) => {
           duration: "",
           frequency: "",
           assignedTrainer: "",
-          exercises: [{ exerciseName: "", sets: "", restTime: "" }],
+          exercises: [],
         });
-        setErrors({}); // Clear errors after successful submission
+        setErrors({});
         alert("✅ Workout plan created/updated successfully!");
       } else {
         console.error("onSubmit is not a function");
@@ -189,6 +249,7 @@ const WorkoutForm = ({ onSubmit, initialData }) => {
   return (
     <div className="form-container">
       <h2 className="form-title">Create/Edit Workout Plan</h2>
+
       {/* Display form-wide errors */}
       {Object.values(errors).length > 0 && (
         <div className="error-text">
@@ -200,6 +261,7 @@ const WorkoutForm = ({ onSubmit, initialData }) => {
           </ul>
         </div>
       )}
+
       <form onSubmit={handleSubmit} className="form">
         {/* Name */}
         <div className="form-group">
@@ -224,9 +286,8 @@ const WorkoutForm = ({ onSubmit, initialData }) => {
             required
           >
             <option value="">Select Goal</option>
-            <option value="Muscle Gain">Muscle Gain</option>
             <option value="Weight Loss">Weight Loss</option>
-            <option value="Endurance">Endurance</option>
+            <option value="Muscle Gain">Muscle Gain</option>
           </select>
           {errors.fitnessGoal && <p className="error-text">{errors.fitnessGoal}</p>}
         </div>
@@ -243,7 +304,6 @@ const WorkoutForm = ({ onSubmit, initialData }) => {
             <option value="">Select Level</option>
             <option value="Beginner">Beginner</option>
             <option value="Intermediate">Intermediate</option>
-            <option value="Advanced">Advanced</option>
           </select>
           {errors.level && <p className="error-text">{errors.level}</p>}
         </div>
@@ -271,7 +331,6 @@ const WorkoutForm = ({ onSubmit, initialData }) => {
             required
           >
             <option value="">Select Frequency</option>
-            <option value="Daily">Daily</option>
             <option value="3 Days/Week">3 Days/Week</option>
             <option value="5 Days/Week">5 Days/Week</option>
           </select>
@@ -290,6 +349,23 @@ const WorkoutForm = ({ onSubmit, initialData }) => {
           />
           {errors.assignedTrainer && <p className="error-text">{errors.assignedTrainer}</p>}
         </div>
+
+        {/* Generate Exercises Button */}
+        <button
+          type="button"
+          onClick={generateExercises}
+          style={{
+            backgroundColor: "#FFA500",
+            color: "white",
+            padding: "10px 20px",
+            border: "none",
+            borderRadius: "5px",
+            cursor: "pointer",
+            marginTop: "20px",
+          }}
+        >
+          Generate Exercises
+        </button>
 
         {/* Exercises */}
         <h3>Exercises:</h3>
