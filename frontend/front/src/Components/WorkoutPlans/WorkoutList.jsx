@@ -1,4 +1,3 @@
-// src/Components/WorkoutPlans/WorkoutList.jsx
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import WorkoutForm from "./WorkoutForm"; // Import the WorkoutForm component
@@ -114,24 +113,37 @@ const WorkoutList = () => {
       ) : (
         <div className="workout-cards-container">
           {workoutPlans.map((plan) => (
-            <div
-              key={plan._id}
-              className={`workout-card ${getCardClass(plan.level)}`}
-            >
-              <h3>{plan.name}</h3>
-              <p><strong>Fitness Goal:</strong> {plan.fitnessGoal}</p>
-              <p><strong>Level:</strong> {plan.level}</p>
-              <p><strong>Duration:</strong> {plan.duration} days</p>
-              <p><strong>Frequency:</strong> {plan.frequency}</p>
-              <p><strong>Assigned Trainer:</strong> {plan.assignedTrainer}</p>
-              <h4>Exercises:</h4>
-              <ul>
-                {plan.exercises.map((exercise, index) => (
-                  <li key={index}>
-                    {exercise.exerciseName} - {exercise.sets} sets, {exercise.restTime} sec rest
-                  </li>
-                ))}
-              </ul>
+            <div key={plan._id} className={`workout-card ${getCardClass(plan.level)}`}>
+              <div className="card-header">
+                <h3>{plan.name}</h3>
+                <span className="level-badge">{plan.level}</span>
+              </div>
+              <div className="card-content">
+                <p><strong>Fitness Goal:</strong> {plan.fitnessGoal}</p>
+                <p><strong>Duration:</strong> {plan.duration} days</p>
+                <p><strong>Frequency:</strong> {plan.frequency}</p>
+                <p><strong>Trainer:</strong> {plan.assignedTrainer}</p>
+
+                <h4>Exercises</h4>
+                <table className="exercise-table">
+                  <thead>
+                    <tr>
+                      <th>Exercise</th>
+                      <th>Sets</th>
+                      <th>Rest Time</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {plan.exercises.map((exercise, index) => (
+                      <tr key={index}>
+                        <td>{exercise.exerciseName}</td>
+                        <td>{exercise.sets}</td>
+                        <td>{exercise.restTime} sec</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
               <div className="card-actions">
                 <button
                   className="btn-update"
