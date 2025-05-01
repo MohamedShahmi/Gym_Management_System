@@ -34,7 +34,7 @@ const SignupForm = () => {
       if (response.data.message === "User created successfully") {
         toast.success("Account created successfully!");
         setTimeout(() => {
-          navigate('/users'); // ✅ Redirect to Users Dashboard
+          navigate('/login'); 
         }, 2000);
       }
     } catch (error) {
