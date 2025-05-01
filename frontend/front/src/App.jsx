@@ -7,6 +7,7 @@ import Footer from "./Components/Schedule/Footer";
 //import WorkoutForm from "./Components/Workout/WorkoutForm"; // Ensure the path is correct
 //import WorkoutList from "./Components/Workout/WorkoutList"; // Ensure the path is correct
 
+
 function App() {
   const [workoutPlans, setWorkoutPlans] = useState([]);
   const [showForm, setShowForm] = useState(false);
