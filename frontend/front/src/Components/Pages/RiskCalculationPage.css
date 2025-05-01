@@ -1,0 +1,115 @@
+/* General Page Styling */
+.risk-calculation-page {
+    background-color: #f4f4f4; /* Light background for the page */
+    min-height: 100vh; /* Full viewport height */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Container for the Risk Calculation Form */
+  .risk-calculation-container {
+    max-width: 600px; /* Limit width for better readability */
+    margin: auto;
+    padding: 30px;
+    background-color: #ffffff; /* White background for the form */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  
+  /* Title Styling */
+  h2 {
+    text-align: center; /* Center-align the title */
+    color: #333; /* Dark gray color */
+    margin-bottom: 20px; /* Add spacing below the title */
+  }
+  
+  /* Form Group Styling */
+  .form-group {
+    margin-bottom: 15px; /* Space between form fields */
+  }
+  
+  /* Label Styling */
+  label {
+    font-weight: bold; /* Bold labels for emphasis */
+    margin-bottom: 5px; /* Space between label and input */
+    display: block; /* Ensure labels are on their own line */
+    color: #333; /* Dark gray color */
+  }
+  
+  /* Input and Select Field Styling */
+  input,
+  select,
+  textarea {
+    width: 100%; /* Full width for consistency */
+    padding: 10px; /* Padding inside fields */
+    border: 2px solid #fbf7f7; /* Light border */
+    border-radius: 6px; /* Rounded corners */
+    font-size: 16px; /* Larger font size for readability */
+    color: #333; /* Dark gray text */
+    background-color: #ffffff; /* White background */
+    transition: all 0.3s ease-in-out; /* Smooth transitions */
+  }
+  
+  /* Highlight Fields on Focus */
+  input:focus,
+  select:focus,
+  textarea:focus {
+    border-color: #ff8800; /* Orange border when focused */
+    outline: none; /* Remove default focus outline */
+    box-shadow: 0 0 5px rgba(255, 136, 0, 0.7); /* Glow effect */
+  }
+  
+  /* Submit Button Styling */
+  .form-button {
+    background-color: #007bff; /* Blue background */
+    color: white; /* White text */
+    padding: 10px; /* Padding inside button */
+    border: none; /* No border */
+    border-radius: 6px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    font-size: 16px; /* Larger font size */
+    font-weight: bold; /* Bold text */
+    text-transform: uppercase; /* Uppercase text */
+    margin-top: 20px; /* Space above the button */
+    transition: background-color 0.3s ease; /* Smooth hover effect */
+  }
+  
+  /* Hover Effect for Submit Button */
+  .form-button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+  }
+  
+  /* Risk Result Styling */
+  .risk-result {
+    text-align: center; /* Center-align the result */
+    margin-top: 20px; /* Space above the result */
+  }
+  
+  .risk-result h3 {
+    color: #ff8800; /* Orange color for emphasis */
+    font-size: 24px; /* Larger font size */
+    margin-bottom: 20px; /* Space below the result */
+  }
+  
+  /* Back to Home Button */
+  .back-button {
+    background-color: #ff8800; /* Orange background */
+    color: white; /* White text */
+    padding: 10px 20px; /* Padding inside button */
+    border: none; /* No border */
+    border-radius: 6px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    font-size: 16px; /* Larger font size */
+    font-weight: bold; /* Bold text */
+    text-transform: uppercase; /* Uppercase text */
+    transition: background-color 0.3s ease; /* Smooth hover effect */
+  }
+  
+  .back-button:hover {
+    background-color: #e67e22; /* Darker orange on hover */
+  }
