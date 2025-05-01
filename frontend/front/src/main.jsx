@@ -18,6 +18,7 @@ import UsersDashboard from "./Components/Pages/Users/UsersDashboard"; // Import 
 import WorkoutListPage from "./Components/WorkoutPlans/WorkoutList"; // Import Workout List Page
 import WorkoutFormPage from "./Components/WorkoutPlans/WorkoutForm"; // Import Workout Form Page
 import ReportPage from "./Components/Schedule/ReportPage";
+import RiskCalculationPage from "./Components/Pages/RiskCalculationPage";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -39,6 +40,10 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         
         {/* Generate Report Form */}
         <Route path="/generate-schedule-report" element={<ReportPage />} />
+
+        {/* Risk Calculation Page */}
+        <Route path="/risk-calculation" element={<RiskCalculationPage />} />
+
 
 
         {/* Workout List Page */}

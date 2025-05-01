@@ -1,0 +1,56 @@
+.risk-calculation-container {
+    max-width: 850px !important;
+    margin: auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .risk-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+  }
+  
+  input,
+  select {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #fbf7f7;
+    border-radius: 6px;
+    font-size: 16px;
+  }
+  
+  .form-button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .form-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .risk-result {
+    text-align: center;
+  }
+  
+  .risk-result h3 {
+    color: #ff8800;
+    margin-bottom: 20px;
+  }
