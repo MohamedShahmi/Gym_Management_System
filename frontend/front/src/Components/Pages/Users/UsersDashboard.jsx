@@ -4,10 +4,13 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import Header from "../../Schedule/Header";
 import Footer from "../../Schedule/Footer";
+import ReadUserForm from "./ReadUserForm"; // Import the ReadUserForm modal
 import "./UsersDashboard.css";
 
 const UsersDashboard = () => {
   const [users, setUsers] = useState([]);
+  const [selectedUser, setSelectedUser] = useState(null);
+  const [showReadForm, setShowReadForm] = useState(false);
   const navigate = useNavigate();
 
   const fetchUsers = () => {
@@ -33,6 +36,16 @@ const UsersDashboard = () => {
 
   const handleAddUser = () => {
     navigate("/signup");
+  };
+
+  const handleRead = (user) => {
+    setSelectedUser(user);
+    setShowReadForm(true);
+  };
+
+  const closeReadForm = () => {
+    setSelectedUser(null);
+    setShowReadForm(false);
   };
 
   return (
@@ -62,40 +75,42 @@ const UsersDashboard = () => {
                 <td>{user.age}</td>
                 <td>{user.phoneno}</td>
                 <td>
-  <div className="action-group">
-    <button 
-      className="read-button"
-      onClick={() => toast.info(`Read user ${user.userID}`)}
-    >
-      Read
-    </button>
-    <button 
-      className="update-button"
-      onClick={() => toast.info(`Update user ${user.userID}`)}
-    >
-      Update
-    </button>
-    <button 
-      className="delete-button"
-      onClick={() => handleDelete(user._id)}
-    >
-      Delete
-    </button>
-  </div>
-</td>
+                  <div className="action-group">
+                    <button 
+                      className="read-button"
+                      onClick={() => handleRead(user)}
+                    >
+                      Read
+                    </button>
+                    <button 
+                      className="update-button"
+                      onClick={() => toast.info(`Update user ${user.userID}`)}
+                    >
+                      Update
+                    </button>
+                    <button 
+                      className="delete-button"
+                      onClick={() => handleDelete(user._id)}
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </td>
               </tr>
             ))}
           </tbody>
         </table>
         <div className="add-user-container">
-  <button 
-    onClick={handleAddUser} 
-    className="btn-create"
-  >
-    Add User
-  </button>
-</div>
+          <button 
+            onClick={handleAddUser} 
+            className="btn-create"
+          >
+            Add User
+          </button>
+        </div>
       </div>
+
+      {showReadForm && <ReadUserForm user={selectedUser} onClose={closeReadForm} />}
       <Footer />
     </div>
   );
