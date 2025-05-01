@@ -1,7 +1,7 @@
 /* src/Components/WorkoutPlans/WorkoutList.css */
 .workout-list-container {
-    max-width: 800px;
-    margin: 20px auto;
+    max-width: 1000px;
+    margin: 0px auto;
     padding: 20px;
     background-color: #313131; /* Dark gray background */
     color: rgb(253, 253, 253); /* White text */

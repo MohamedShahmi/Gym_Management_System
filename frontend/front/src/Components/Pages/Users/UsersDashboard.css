@@ -6,6 +6,10 @@
   flex-direction: column;
   min-height: 100vh; /* Ensure the container takes at least the height of the screen */
 }
+.action-group {
+  display: flex;
+  gap: 10px; /* Adjust the value to control spacing */
+}
 
 /* Style for the header */
 .dashboard-container h2 {
@@ -56,35 +60,36 @@
 }
 
 .read-button {
-  background-color: #4CAF50;
+  background-color: #007bff; /* Blue */
   color: white;
 }
 
 .update-button {
-  background-color: #007bff;
+  background-color: #4CAF50 !important; /* Green */
   color: white;
 }
 
 .delete-button {
-  background-color: #f44336;
+  background-color: #f44336; /* Red */
   color: white;
 }
 
 /* Container for Add User button */
 .add-user-container {
-  margin-top: auto; /* Push the button to the bottom */
-  text-align: center;
-  padding: 20px;
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
 }
 
 .btn-create {
-  background-color: #3498db; /* Light blue button color */
+  background-color: #3498db; /* Light blue */
   color: white;
   padding: 12px 20px;
   font-size: 16px;
   border-radius: 4px;
   cursor: pointer;
   border: none;
+  transition: background-color 0.3s ease;
 }
 
 .btn-create:hover {

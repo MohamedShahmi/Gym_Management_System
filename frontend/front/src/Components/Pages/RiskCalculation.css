@@ -1,56 +1,76 @@
 .risk-calculation-container {
-    max-width: 850px !important;
-    margin: auto;
-    padding: 30px;
-    background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-  }
-  
-  .risk-form {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .form-group {
-    margin-bottom: 15px;
-  }
-  
-  label {
-    font-weight: bold;
-    margin-bottom: 5px;
-    display: block;
-  }
-  
-  input,
-  select {
-    width: 100%;
-    padding: 10px;
-    border: 2px solid #fbf7f7;
-    border-radius: 6px;
-    font-size: 16px;
-  }
-  
-  .form-button {
-    background-color: #007bff;
-    color: white;
-    padding: 10px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-  }
-  
-  .form-button:hover {
-    background-color: #0056b3;
-  }
-  
-  .risk-result {
-    text-align: center;
-  }
-  
-  .risk-result h3 {
-    color: #ff8800;
-    margin-bottom: 20px;
-  }
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #f7f7f7;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.risk-form .form-group {
+  margin-bottom: 15px;
+}
+
+.risk-form label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.risk-form input,
+.risk-form select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.form-button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.form-button:hover {
+  background-color: #0056b3;
+}
+
+.result-container {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.result-container h3 {
+  margin-top: 0;
+  color: #333;
+}
+
+.result-container p {
+  margin: 5px 0;
+}
+
+.result-container h4 {
+  margin: 15px 0 5px;
+  color: #333;
+}
+
+.risk-low {
+  color: green;
+  font-weight: bold;
+}
+
+.risk-medium {
+  color: orange;
+  font-weight: bold;
+}
+
+.risk-high {
+  color: red;
+  font-weight: bold;
+}

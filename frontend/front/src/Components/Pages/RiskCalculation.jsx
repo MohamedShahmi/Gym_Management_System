@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./RiskCalculation.css"; // Import CSS for styling
+import "./RiskCalculation.css";
 
 const RiskCalculation = () => {
   const [formData, setFormData] = useState({
@@ -10,19 +10,48 @@ const RiskCalculation = () => {
     cholesterolLevel: "",
     sugarLevel: "",
     pressureLevel: "",
-    workoutPlan: "",
+    cardioSets: "0",
+    weightliftSets: "0",
+    climbersSets: "0",
+    pushupsSets: "0",
+    stretchesSets: "0",
   });
-  const [riskLevel, setRiskLevel] = useState(null);
+
+  const [result, setResult] = useState(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const calculateRisk = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const requiredFields = [
+      "name",
+      "age",
+      "weight",
+      "height",
+      "cholesterolLevel",
+      "sugarLevel",
+      "pressureLevel",
+    ];
+    const missing = requiredFields.filter((field) => !formData[field]);
+
+    if (missing.length > 0) {
+      alert("Please fill in all required fields.");
+      return;
+    }
+
+    const risk = calculateRisk(formData);
+    setResult({
+      ...formData,
+      riskPercentage: risk.riskPercentage,
+      riskCategory: risk.riskCategory,
+    });
+  };
+
+  const calculateRisk = (data) => {
     const {
       age,
       weight,
@@ -30,138 +59,145 @@ const RiskCalculation = () => {
       cholesterolLevel,
       sugarLevel,
       pressureLevel,
-      workoutPlan,
-    } = formData;
+      cardioSets,
+      weightliftSets,
+      climbersSets,
+      pushupsSets,
+      stretchesSets,
+    } = data;
 
-    // Example Risk Calculation Equation
-    const bmi = (weight / ((height / 100) ** 2)).toFixed(2); // BMI Calculation
-    const cholesterolScore = cholesterolLevel === "High" ? 3 : cholesterolLevel === "Medium" ? 2 : 1;
-    const sugarScore = sugarLevel === "High" ? 3 : sugarLevel === "Medium" ? 2 : 1;
-    const pressureScore = pressureLevel === "High" ? 3 : pressureLevel === "Medium" ? 2 : 1;
-    const workoutScore = workoutPlan === "Climbers" ? 1 : workoutPlan === "Weight Lift" ? 2 : 3;
+    const bmi = (weight / ((height / 100) ** 2)).toFixed(2);
 
-    const totalRisk = parseFloat(age) + parseFloat(bmi) + cholesterolScore + sugarScore + pressureScore + workoutScore;
+    const totalSets =
+      parseInt(cardioSets) +
+      parseInt(weightliftSets) +
+      parseInt(climbersSets) +
+      parseInt(pushupsSets) +
+      parseInt(stretchesSets);
 
-    if (totalRisk <= 10) {
-      setRiskLevel("Low");
-    } else if (totalRisk > 10 && totalRisk <= 20) {
-      setRiskLevel("Medium");
-    } else {
-      setRiskLevel("High");
-    }
-  };
+    const cholesterolScore =
+      cholesterolLevel === "High" ? 3 : cholesterolLevel === "Medium" ? 2 : 1;
+    const sugarScore =
+      sugarLevel === "High" ? 3 : sugarLevel === "Medium" ? 2 : 1;
+    const pressureScore =
+      pressureLevel === "High" ? 3 : pressureLevel === "Medium" ? 2 : 1;
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    calculateRisk();
+    const riskScore =
+      parseFloat(age) * 0.5 +
+      parseFloat(bmi) * 0.7 +
+      cholesterolScore * 2 +
+      sugarScore * 2 +
+      pressureScore * 2 -
+      totalSets * 0.5;
+
+    const maxRisk = 100;
+    const riskPercentage = Math.min(100, Math.max(0, (riskScore / maxRisk) * 100));
+
+    let riskCategory = "Low";
+    if (riskPercentage > 60) riskCategory = "High";
+    else if (riskPercentage > 30) riskCategory = "Medium";
+
+    return {
+      riskPercentage: riskPercentage.toFixed(1),
+      riskCategory,
+    };
   };
 
   return (
     <div className="risk-calculation-container">
-      <h2>Risk Calculation Form</h2>
+      <h2>Health Risk Calculator</h2>
 
-      {!riskLevel ? (
+      {!result ? (
         <form onSubmit={handleSubmit} className="risk-form">
-          {/* Name */}
           <div className="form-group">
-            <label>Name</label>
-            <input
-              type="text"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              required
-            />
+            <label>Name *</label>
+            <input type="text" name="name" value={formData.name} onChange={handleChange} required />
           </div>
 
-          {/* Age */}
           <div className="form-group">
-            <label>Age</label>
-            <input
-              type="number"
-              name="age"
-              value={formData.age}
-              onChange={handleChange}
-              required
-            />
+            <label>Age *</label>
+            <input type="number" name="age" value={formData.age} onChange={handleChange} required />
           </div>
 
-          {/* Weight */}
           <div className="form-group">
-            <label>Weight (kg)</label>
-            <input
-              type="number"
-              name="weight"
-              value={formData.weight}
-              onChange={handleChange}
-              required
-            />
+            <label>Weight (kg) *</label>
+            <input type="number" name="weight" value={formData.weight} onChange={handleChange} required />
           </div>
 
-          {/* Height */}
           <div className="form-group">
-            <label>Height (cm)</label>
-            <input
-              type="number"
-              name="height"
-              value={formData.height}
-              onChange={handleChange}
-              required
-            />
+            <label>Height (cm) *</label>
+            <input type="number" name="height" value={formData.height} onChange={handleChange} required />
           </div>
 
-          {/* Cholesterol Level */}
           <div className="form-group">
-            <label>Cholesterol Level</label>
+            <label>Cholesterol Level *</label>
             <select name="cholesterolLevel" value={formData.cholesterolLevel} onChange={handleChange} required>
               <option value="">Select Level</option>
-              <option value="Low">Low</option>
-              <option value="Medium">Medium</option>
-              <option value="High">High</option>
+              <option value="Low">Low: less than 200 mg/dL</option>
+              <option value="Medium">Medium: 200 to 239 mg/dL</option>
+              <option value="High">High: 240 mg/dL or more</option>
             </select>
           </div>
 
-          {/* Sugar Level */}
           <div className="form-group">
-            <label>Sugar Level</label>
+            <label>Sugar Level *</label>
             <select name="sugarLevel" value={formData.sugarLevel} onChange={handleChange} required>
               <option value="">Select Level</option>
-              <option value="Low">Low</option>
-              <option value="Medium">Medium</option>
-              <option value="High">High</option>
+              <option value="Low">Low: less than 100 mg/dL</option>
+              <option value="Medium">Medium: 100 to 125 mg/dL</option>
+              <option value="High">High: more than 125 mg/dL</option>
             </select>
           </div>
 
-          {/* Pressure Level */}
           <div className="form-group">
-            <label>Pressure Level</label>
+            <label>Pressure Level *</label>
             <select name="pressureLevel" value={formData.pressureLevel} onChange={handleChange} required>
               <option value="">Select Level</option>
-              <option value="Low">Low</option>
-              <option value="Medium">Medium</option>
-              <option value="High">High</option>
+              <option value="Low">Low: less than 120 mmHg</option>
+              <option value="Medium">Medium: 120 to 139 mmHg</option>
+              <option value="High">High: 140 mmHg or more</option>
             </select>
           </div>
 
-          {/* Workout Plan */}
-          <div className="form-group">
-            <label>Workout Plan</label>
-            <select name="workoutPlan" value={formData.workoutPlan} onChange={handleChange} required>
-              <option value="">Select Plan</option>
-              <option value="Climbers">Climbers</option>
-              <option value="Weight Lift">Weight Lift</option>
-              <option value="Cardio">Cardio</option>
-            </select>
-          </div>
+          <h2>Select Exercise Sets</h2>
+          {["Cardio", "Weightlift", "Climbers", "Pushups", "Stretches"].map((exercise) => (
+            <div className="form-group" key={exercise}>
+              <label>{exercise}</label>
+              <select
+                name={`${exercise.toLowerCase()}Sets`}
+                value={formData[`${exercise.toLowerCase()}Sets`]}
+                onChange={handleChange}
+              >
+                <option value="0">0 Sets</option>
+                <option value="10">10 Sets</option>
+                <option value="20">20 Sets</option>
+                <option value="30">30 Sets</option>
+              </select>
+            </div>
+          ))}
 
-          {/* Submit Button */}
           <button type="submit" className="form-button">
             Calculate Risk
           </button>
         </form>
       ) : (
-        <div className="risk-result">
-          <h3>Risk Level: {riskLevel}</h3>
+        <div className="result-container">
+          <h2>📊 Risk Assessment Result</h2>
+          <p><strong>Name:</strong> {result.name}</p>
+          <p><strong>Age:</strong> {result.age}</p>
+          <p><strong>Weight:</strong> {result.weight} kg</p>
+          <p><strong>Height:</strong> {result.height} cm</p>
+          <p><strong>Cholesterol:</strong> {result.cholesterolLevel}</p>
+          <p><strong>Sugar:</strong> {result.sugarLevel}</p>
+          <p><strong>Pressure:</strong> {result.pressureLevel}</p>
+          <p><strong>Cardio:</strong> {result.cardioSets} sets</p>
+          <p><strong>Weightlift:</strong> {result.weightliftSets} sets</p>
+          <p><strong>Climbers:</strong> {result.climbersSets} sets</p>
+          <p><strong>Pushups:</strong> {result.pushupsSets} sets</p>
+          <p><strong>Stretches:</strong> {result.stretchesSets} sets</p>
+          <h4>Risk Level: <span className={`risk-${result.riskCategory.toLowerCase()}`}>{result.riskCategory}</span></h4>
+          <h4>Risk Percentage: {result.riskPercentage}%</h4>
+          <button onClick={() => setResult(null)} className="form-button">Try Again</button>
         </div>
       )}
     </div>
