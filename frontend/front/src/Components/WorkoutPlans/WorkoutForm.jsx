@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import html2pdf from "html2pdf.js"; // Import PDF generation library
 import "./WorkoutForm.css"; // Import CSS for styling
 
 // Predefined workout plans
@@ -69,7 +70,6 @@ const WorkoutForm = ({ onSubmit, initialData }) => {
       exercises: [],
     }
   );
-
   const [errors, setErrors] = useState({});
 
   const handleChange = (e) => {
@@ -100,17 +100,13 @@ const WorkoutForm = ({ onSubmit, initialData }) => {
 
   const generateExercises = () => {
     const { fitnessGoal, level, frequency } = formData;
-
-    // Find the matching predefined workout plan
-    const selectedPlan =
-      predefinedWorkouts[fitnessGoal]?.[level]?.[frequency];
+    const selectedPlan = predefinedWorkouts[fitnessGoal]?.[level]?.[frequency];
 
     if (!selectedPlan) {
       alert("No matching workout plan found. Please select valid options.");
       return;
     }
 
-    // Set the generated workout plan
     setFormData((prevData) => ({
       ...prevData,
       exercises: selectedPlan,
@@ -154,63 +150,28 @@ const WorkoutForm = ({ onSubmit, initialData }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Validate all fields before submission
     let isValid = true;
     let newErrors = {};
 
-    if (!formData.name) {
-      newErrors.name = "Name is required.";
-      isValid = false;
-    } else if (formData.name.length < 3) {
-      newErrors.name = "Name must be at least 3 characters.";
-      isValid = false;
-    }
+    // Validate form fields
+    ["name", "fitnessGoal", "level", "duration", "frequency", "assignedTrainer"].forEach((field) => {
+      if (!formData[field]) {
+        newErrors[field] = `${field.charAt(0).toUpperCase() + field.slice(1)} is required.`;
+        isValid = false;
+      }
+    });
 
-    if (!formData.fitnessGoal) {
-      newErrors.fitnessGoal = "Fitness goal is required.";
-      isValid = false;
-    }
-
-    if (!formData.level) {
-      newErrors.level = "Level is required.";
-      isValid = false;
-    }
-
-    if (!formData.duration) {
-      newErrors.duration = "Duration is required.";
-      isValid = false;
-    } else if (isNaN(formData.duration) || formData.duration <= 0) {
-      newErrors.duration = "Duration must be a positive number.";
-      isValid = false;
-    }
-
-    if (!formData.frequency) {
-      newErrors.frequency = "Frequency is required.";
-      isValid = false;
-    }
-
-    if (!formData.assignedTrainer) {
-      newErrors.assignedTrainer = "Assigned trainer is required.";
-      isValid = false;
-    }
-
+    // Validate exercises
     formData.exercises.forEach((exercise, index) => {
       if (!exercise.exerciseName) {
         newErrors[`exercise-${index}-exerciseName`] = "Exercise name is required.";
         isValid = false;
       }
-      if (!exercise.sets) {
-        newErrors[`exercise-${index}-sets`] = "Sets is required.";
-        isValid = false;
-      } else if (isNaN(exercise.sets) || exercise.sets <= 0) {
+      if (!exercise.sets || isNaN(exercise.sets) || exercise.sets <= 0) {
         newErrors[`exercise-${index}-sets`] = "Sets must be a positive number.";
         isValid = false;
       }
-      if (!exercise.restTime) {
-        newErrors[`exercise-${index}-restTime`] = "Rest time is required.";
-        isValid = false;
-      } else if (isNaN(exercise.restTime) || exercise.restTime <= 0) {
+      if (!exercise.restTime || isNaN(exercise.restTime) || exercise.restTime <= 0) {
         newErrors[`exercise-${index}-restTime`] = "Rest time must be a positive number.";
         isValid = false;
       }
@@ -222,28 +183,64 @@ const WorkoutForm = ({ onSubmit, initialData }) => {
     }
 
     try {
-      console.log("Submitting form data:", formData); // Debugging log
-      if (typeof onSubmit === "function") {
-        await onSubmit(formData); // Call the onSubmit prop
-        setFormData({
-          name: "",
-          fitnessGoal: "",
-          level: "",
-          duration: "",
-          frequency: "",
-          assignedTrainer: "",
-          exercises: [],
-        });
-        setErrors({});
-        alert("✅ Workout plan created/updated successfully!");
-      } else {
-        console.error("onSubmit is not a function");
-        alert("❌ Error: onSubmit is not a function");
-      }
+      await onSubmit(formData); // Call the onSubmit prop
+      setFormData({
+        name: "",
+        fitnessGoal: "",
+        level: "",
+        duration: "",
+        frequency: "",
+        assignedTrainer: "",
+        exercises: [],
+      });
+      setErrors({});
+      alert("✅ Workout plan created/updated successfully!");
     } catch (error) {
-      console.error("Error details:", error); // Log full error for debugging
+      console.error("Error details:", error);
       alert("❌ Error: " + (error.response?.data?.message || error.message || "Unknown error"));
     }
+  };
+
+  const generatePDF = () => {
+    const pdfContent = document.createElement("div");
+    pdfContent.innerHTML = `
+      <h2>Workout Plan Report</h2>
+      <p><strong>Name:</strong> ${formData.name}</p>
+      <p><strong>Fitness Goal:</strong> ${formData.fitnessGoal}</p>
+      <p><strong>Level:</strong> ${formData.level}</p>
+      <p><strong>Duration:</strong> ${formData.duration} days</p>
+      <p><strong>Frequency:</strong> ${formData.frequency}</p>
+      <p><strong>Assigned Trainer:</strong> ${formData.assignedTrainer}</p>
+      <h3>Exercises:</h3>
+      <table border="1" cellpadding="5" cellspacing="0">
+        <thead>
+          <tr>
+            <th>Exercise</th>
+            <th>Sets</th>
+            <th>Rest Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${formData.exercises.map((exercise) => `
+            <tr>
+              <td>${exercise.exerciseName}</td>
+              <td>${exercise.sets}</td>
+              <td>${exercise.restTime} sec</td>
+            </tr>
+          `).join("")}
+        </tbody>
+      </table>
+    `;
+
+    const options = {
+      margin: 10,
+      filename: `${formData.name}-workout-plan.pdf`,
+      image: { type: "jpeg", quality: 0.98 },
+      html2canvas: { scale: 2 },
+      jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+    };
+
+    html2pdf().from(pdfContent).set(options).save();
   };
 
   return (
@@ -362,6 +359,7 @@ const WorkoutForm = ({ onSubmit, initialData }) => {
             borderRadius: "5px",
             cursor: "pointer",
             marginTop: "20px",
+            width: "100%",
           }}
         >
           Generate Exercises
@@ -376,9 +374,7 @@ const WorkoutForm = ({ onSubmit, initialData }) => {
               <input
                 type="text"
                 value={exercise.exerciseName}
-                onChange={(e) =>
-                  handleExerciseChange(index, "exerciseName", e.target.value)
-                }
+                onChange={(e) => handleExerciseChange(index, "exerciseName", e.target.value)}
                 required
               />
               {errors[`exercise-${index}-exerciseName`] && (
@@ -390,9 +386,7 @@ const WorkoutForm = ({ onSubmit, initialData }) => {
               <input
                 type="number"
                 value={exercise.sets}
-                onChange={(e) =>
-                  handleExerciseChange(index, "sets", e.target.value)
-                }
+                onChange={(e) => handleExerciseChange(index, "sets", e.target.value)}
                 required
               />
               {errors[`exercise-${index}-sets`] && (
@@ -404,9 +398,7 @@ const WorkoutForm = ({ onSubmit, initialData }) => {
               <input
                 type="number"
                 value={exercise.restTime}
-                onChange={(e) =>
-                  handleExerciseChange(index, "restTime", e.target.value)
-                }
+                onChange={(e) => handleExerciseChange(index, "restTime", e.target.value)}
                 required
               />
               {errors[`exercise-${index}-restTime`] && (
@@ -416,25 +408,53 @@ const WorkoutForm = ({ onSubmit, initialData }) => {
           </div>
         ))}
 
-        {/* Add Exercise Button */}
+        {/* Buttons */}
         <button
           type="button"
-          onClick={addExerciseField}
+          onClick={generatePDF}
           style={{
-            backgroundColor: "#FFA500",
+            backgroundColor: "#007BFF",
             color: "white",
             padding: "10px 20px",
             border: "none",
             borderRadius: "5px",
             cursor: "pointer",
             marginTop: "10px",
+            width: "100%",
+          }}
+        >
+          Generate Report (PDF)
+        </button>
+        <button
+          type="button"
+          onClick={addExerciseField}
+          style={{
+            backgroundColor: "#28A745",
+            color: "white",
+            padding: "10px 20px",
+            border: "none",
+            borderRadius: "5px",
+            cursor: "pointer",
+            marginTop: "10px",
+            width: "100%",
           }}
         >
           Add Exercise
         </button>
-
-        {/* Submit Button */}
-        <button type="submit" className="form-button">
+        <button
+          type="submit"
+          className="form-button"
+          style={{
+            backgroundColor: "#DC3545",
+            color: "white",
+            padding: "10px 20px",
+            border: "none",
+            borderRadius: "5px",
+            cursor: "pointer",
+            marginTop: "10px",
+            width: "100%",
+          }}
+        >
           Submit
         </button>
       </form>
