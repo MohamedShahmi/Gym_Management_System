@@ -30,11 +30,10 @@ const SignupForm = () => {
     e.preventDefault();
     try {
       const response = await axios.post('http://localhost:3000/api/users/signup', formData);
-
       if (response.data.message === "User created successfully") {
         toast.success("Account created successfully!");
         setTimeout(() => {
-          navigate('/login'); 
+          navigate('/login');
         }, 2000);
       }
     } catch (error) {
@@ -60,6 +59,12 @@ const SignupForm = () => {
             <input type="password" name="password" value={formData.password} onChange={handleChange} placeholder="Password" required />
             <input type="submit" value="Sign Up" />
           </form>
+          <p className="login-link">
+            Already have an account?{" "}
+            <span onClick={() => navigate('/login')} className="login-text">
+              Login here
+            </span>
+          </p>
         </div>
       </div>
       <Footer />
