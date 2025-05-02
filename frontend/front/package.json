@@ -17,6 +17,7 @@
     "axios": "^1.8.4",
     "bcrypt": "^5.1.1",
     "bootstrap": "^5.3.3",
+    "html2canvas": "^1.4.1",
     "html2pdf.js": "^0.10.3",
     "jspdf": "^3.0.1",
     "jspdf-autotable": "^5.0.2",

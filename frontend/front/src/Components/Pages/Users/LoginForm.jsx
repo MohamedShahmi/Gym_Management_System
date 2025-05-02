@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
-import Header from "../../Schedule/Header";  // Updated import path
-import Footer from "../../Schedule/Footer";  // Updated import path
-import "./LoginForm.css";  // Add your custom styles here
+import Header from "../../Schedule/Header";  
+import Footer from "../../Schedule/Footer";  
+import "./LoginForm.css";  
 
 const LoginForm = () => {
   const navigate = useNavigate();
