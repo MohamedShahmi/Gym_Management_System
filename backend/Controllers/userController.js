@@ -15,7 +15,6 @@ export const createUser = async (req, res) => {
       password,
     } = req.body;
 
-    // Optional: Check if userID or email already exists
     const existingUser = await User.findOne({ userID });
     if (existingUser) {
       return res.status(400).json({ message: "UserID already exists" });
@@ -40,17 +39,33 @@ export const createUser = async (req, res) => {
   }
 };
 
+// Login user (email + password check)
+export const loginUser = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    const user = await User.findOne({ email });
+    if (!user || user.password !== password) {
+      return res.status(401).json({ message: "Invalid email or password" });
+    }
+
+    res.status(200).json({ message: "Login successful", user });
+  } catch (error) {
+    res.status(500).json({ message: "Login error", error: error.message });
+  }
+};
+
 // Get all users
 export const getAllUsers = async (req, res) => {
   try {
-    const users = await User.find(); // Includes MongoDB _id field
+    const users = await User.find();
     res.status(200).json(users);
   } catch (error) {
     res.status(500).json({ message: "Error fetching users", error: error.message });
   }
 };
 
-// Get a user by ID (MongoDB _id)
+// Get user by ID
 export const getUserById = async (req, res) => {
   try {
     const { id } = req.params;
@@ -62,7 +77,7 @@ export const getUserById = async (req, res) => {
   }
 };
 
-// Update a user by ID
+// Update user
 export const updateUser = async (req, res) => {
   try {
     const { id } = req.params;
@@ -74,7 +89,7 @@ export const updateUser = async (req, res) => {
   }
 };
 
-// Delete a user by ID
+// Delete user
 export const deleteUser = async (req, res) => {
   try {
     const { id } = req.params;
@@ -85,3 +100,4 @@ export const deleteUser = async (req, res) => {
     res.status(500).json({ message: "Error deleting user", error: error.message });
   }
 };
+

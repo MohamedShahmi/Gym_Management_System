@@ -192,7 +192,7 @@ const RiskCalculation = () => {
         </form>
       ) : (
         <div className="result-container">
-          <h2>📊 Risk Assessment Result</h2>
+          <h2>Here is your Risk Assessment Result!</h2>
           <p><strong>Name:</strong> {result.name}</p>
           <p><strong>Age:</strong> {result.age}</p>
           <p><strong>Weight:</strong> {result.weight} kg</p>

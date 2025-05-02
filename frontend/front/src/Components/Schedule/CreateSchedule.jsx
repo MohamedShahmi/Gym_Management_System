@@ -27,9 +27,18 @@ const CreateSchedule = () => {
       }, 2000);
     } catch (error) {
       console.error("Error details:", error); // Log full error for debugging
+    
+      const errorMessage =
+        error.response?.data?.message || error.message || "Unknown error";
+    
+      const isDuplicateID =
+        errorMessage.toLowerCase().includes("duplicate") ||
+        errorMessage.toLowerCase().includes("scheduleid");
+    
       setMessage(
-        "❌ Error: " +
-          (error.response?.data?.message || error.message || "Unknown error")
+        isDuplicateID
+          ? "❌ Sorry, Duplicate Schedule ID is not allowed. Please try again with a unique Schedule ID."
+          : "❌ Error: " + errorMessage
       );
     }
   };
