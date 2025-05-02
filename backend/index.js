@@ -4,7 +4,8 @@ import cors from "cors";
 import { PORT, mongoDBURL } from "./config.js";
 import userRoutes from "./Routes/userRoutes.js";
 import scheduleRoute from "./Routes/scheduleRoute.js";
-import workoutRoutes from "./Routes/workoutRoutes.js"; // Import workout routes
+import workoutRoutes from "./Routes/workoutRoutes.js"; 
+import progressRoutes from "./Routes/progressRoutes.js"; // Import progress routes
 
 const app = express();
 
@@ -21,6 +22,7 @@ app.use(express.urlencoded({ extended: false })); // Parse URL-encoded payloads
 app.use("/api/users", userRoutes); // User Routes
 app.use("/api/schedules", scheduleRoute); // Schedule Routes
 app.use("/api/workout", workoutRoutes); // Workout Plan Routes
+app.use("/api/progress", progressRoutes); // Progress Routes
 
 // Default route
 app.get("/", (req, res) => {

@@ -20,6 +20,11 @@ import WorkoutFormPage from "./Components/WorkoutPlans/WorkoutForm"; // Import W
 import ReportPage from "./Components/Schedule/ReportPage";
 import RiskCalculationPage from "./Components/Pages/RiskCalculationPage";
 
+// Import Progress Components
+import ProgressPage from "./Components/Progress/ProgressPage";
+import AddProgressPage from "./Components/Progress/AddProgressPage";
+import EditProgressPage from "./Components/Progress/EditProgressPage";
+
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>
@@ -44,7 +49,10 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         {/* Risk Calculation Page */}
         <Route path="/risk-calculation" element={<RiskCalculationPage />} />
 
-
+        {/* Progress Tracking Pages */}
+        <Route path="/progress" element={<ProgressPage />} />
+        <Route path="/progress/add" element={<AddProgressPage />} />
+        <Route path="/progress/edit/:id" element={<EditProgressPage />} />
 
         {/* Workout List Page */}
         <Route path="/workouts" element={<WorkoutListPage />} />
