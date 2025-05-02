@@ -16,7 +16,7 @@ const LoginForm = () => {
     try {
       await axios.post("http://localhost:3000/api/users/login", { email, password });
       toast.success("Successfully logged in!");
-      navigate("/users");
+      navigate("/");
     } catch (error) {
       toast.error("Enter valid credentials!");
     }
