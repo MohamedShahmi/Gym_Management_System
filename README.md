@@ -2,6 +2,9 @@
 
 A modern web application designed to efficiently manage gym operations and enhance user experience.
 
+![image](https://github.com/user-attachments/assets/28e05c25-362b-483f-957b-67f5e8158809)
+
+
 ## Features
 
 1. **Member Management**
